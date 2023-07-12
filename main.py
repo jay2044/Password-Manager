@@ -8,6 +8,11 @@ from os import path
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 def generate_password():
+    """
+    Generates a secure password consisting of letters, numbers, and symbols.
+    Inserts the generated password into the password_text Text widget.
+    Copies the generated password to the clipboard.
+    """
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
@@ -27,6 +32,11 @@ def generate_password():
 
 
 def write_password(website, user, password):
+    """
+    Writes the password data to the data.json file.
+    If the file doesn't exist, creates a new file and writes the data.
+    If the file exists, appends the data to the existing file.
+    """
     password_data = {
         "website": website,
         "user": user,
@@ -50,6 +60,10 @@ def write_password(website, user, password):
 
 
 def read_passwords():
+    """
+    Reads the password data from the data.json file.
+    If the file doesn't exist, returns an empty list.
+    """
     try:
         if not path.exists("data.json"):
             return []
@@ -63,6 +77,9 @@ def read_passwords():
 
 
 def update_passwords(passwords):
+    """
+    Updates the password data in the data.json file.
+    """
     try:
         with open("data.json", "w") as data_file:
             json.dump(passwords, data_file, indent=4)
@@ -72,6 +89,11 @@ def update_passwords(passwords):
 
 
 def search_password():
+    """
+    Searches for a password based on the entered website and user.
+    Displays the found password(s) in the password_text Text widget.
+    Copies the found password to the clipboard.
+    """
     website = website_text.get("1.0", "end-1c").strip()
     if not website:
         messagebox.showerror(title="Error", message="Please enter a website!")
@@ -100,6 +122,11 @@ def search_password():
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def save():
+    """
+    Saves the entered password data.
+    Validates if all fields are filled.
+    Displays success/error messages.
+    """
     website = website_text.get("1.0", "end-1c").strip()
     user = user_text.get("1.0", "end-1c").strip()
     password = password_text.get("1.0", "end-1c").strip()
@@ -136,7 +163,7 @@ website_text.focus()
 
 user_label = Label(window, text="Email/Username: ")
 user_text = Text(window, height=1, width=30)
-user_text.insert("1.0", "jayaadithya1@gmail.com")
+user_text.insert("1.0", "xyz@gmail.com")
 
 password_label = Label(window, text="Password: ")
 password_text = Text(window, height=1, width=30)
